@@ -13,31 +13,31 @@ class TelegramLoginController extends Controller
     public function handleCallback(Request $request)
     {
         $authData = $request->all();
-        
+
         if (!$this->checkTelegramAuthorization($authData)) {
             return redirect('/login')->withErrors(['telegram' => 'Telegram authorization failed.']);
         }
 
         $user = User::updateOrCreate(
-            ['telegram_id' => $authData['id']],
-            [
-                'name' => $authData['first_name'] . (isset($authData['last_name']) ? ' ' . $authData['last_name'] : ''),
-                'telegram_username' => $authData['username'] ?? null,
-                'email' => $authData['id'] . '@telegram.user',
-            ]
+        ['telegram_id' => $authData['id']],
+        [
+            'name' => $authData['first_name'] . (isset($authData['last_name']) ? ' ' . $authData['last_name'] : ''),
+            'telegram_username' => $authData['username'] ?? null,
+            'email' => $authData['id'] . '@telegram.user',
+        ]
         );
 
         Auth::login($user);
 
         // Generate AI Welcome Message
-        $agent = new AnonymousAgent(
-            'You are a friendly property manager for a rental system. Generate a very short, warm welcome back message.',
-            [],
-            []
-        );
-        
-        $welcomeMessage = $agent->prompt("The tenant {$user->name} just logged in via Telegram. Say something nice.")->text();
-
+        /*$agent = new AnonymousAgent(
+         'You are a friendly property manager for a rental system. Generate a very short, warm welcome back message.',
+         [],
+         []
+         );
+         
+         $welcomeMessage = $agent->prompt("The tenant {$user->name} just logged in via Telegram. Say something nice.")->text();         */
+        $welcomeMessage = "Welcome back, " . $user->name . "!";
         return redirect()->intended('/admin')->with('status', $welcomeMessage);
     }
 
