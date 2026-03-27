@@ -23,6 +23,7 @@ class TelegramLoginController extends Controller
             [
                 'name' => $authData['first_name'] . (isset($authData['last_name']) ? ' ' . $authData['last_name'] : ''),
                 'telegram_username' => $authData['username'] ?? null,
+                'email' => $authData['id'] . '@telegram.user',
             ]
         );
 
