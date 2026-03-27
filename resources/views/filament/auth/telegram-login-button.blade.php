@@ -1,3 +1,4 @@
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <div id="telegram-login-container" class="flex flex-col items-center justify-center mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
     <div id="telegram-silent-login-status" style="display: none;" class="flex flex-col items-center space-y-3">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
