@@ -1,0 +1,1 @@
+"<?php\n\nrequire __DIR__ . '/vendor/autoload.php';\n$app = require_once __DIR__ . '/bootstrap/app.php';\n$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();\n\nfunction useFacade($name) {\n    return app()->make('Illuminate\Support\Facades\\' . $name);\n}\n"
