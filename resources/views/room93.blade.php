@@ -25,6 +25,31 @@
     </div>
 
     <div class="w-full max-w-md space-y-4">
+        @guest
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                <p class="text-sm text-gray-600 mb-4">ចូលប្រើប្រាស់ដើម្បីគ្រប់គ្រងការជួលរបស់អ្នក (Login to manage your rental)</p>
+                <script async src="https://telegram.org/js/telegram-widget.js?22" 
+                    data-telegram-login="{{ config('services.telegram.bot_username') }}" 
+                    data-size="large" 
+                    data-auth-url="{{ route('auth.telegram.callback') }}" 
+                    data-request-access="write"></script>
+            </div>
+        @endguest
+
+        @auth
+            <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center text-white mr-3">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">សួស្តី (Hello),</p>
+                        <p class="font-bold text-blue-800">{{ auth()->user()->name }}</p>
+                    </div>
+                </div>
+                <a href="/admin" class="text-xs font-medium text-blue-600 hover:underline">គ្រប់គ្រង (Admin)</a>
+            </div>
+        @endauth
 
         <a href="https://link.payway.com.kh/ABAPAY47426033G" target="_blank" 
            class="flex items-center p-4 bg-white border-2 border-blue-600 rounded-xl shadow-sm hover:bg-blue-50 transition-all transform active:scale-95">
